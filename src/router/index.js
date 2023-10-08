@@ -5,8 +5,6 @@ import Login from "../views/auth/Login.vue"
 import Jobs from "../views/jobs/Jobs.vue"
 import { useAuthStore } from '../stores/AuthStore';
 
-
-// navigation guard
 const authGuard = (to, from, next) => {
   const authStore = useAuthStore();
   if (authStore.isAuthenticated) {

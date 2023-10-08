@@ -28,7 +28,9 @@ module.exports = {
         darkGrayishCyan: 'hsl(180, 8%, 52%)',
         veryDarkGrayishCyan: 'hsl(180, 14%, 20%)',
         coralRed: "#ff694b",
-        loginPrimary: '#444444'
+        lightCoralRed: "#fca897",
+        loginPrimary: '#444444',
+        bluePrimary: "#192030"
       },
     },
   },

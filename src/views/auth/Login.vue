@@ -1,6 +1,6 @@
 <template>
   <div
-    class="max-w-md md:max-w-xl mx-auto rounded-xl py-20 p-14 shadow-[rgba(7,_65,_210,_0.1)_0px_9px_30px]"
+    class="max-w-md md:max-w-l mx-auto rounded-xl py-20 p-14 shadow-[rgba(7,_65,_210,_0.1)_0px_9px_30px]"
   >
     <h1 class="text-xl font-bold mb-10 text-loginPrimary">Login to Account</h1>
     <form @submit.prevent="hundleLogin" class="flex flex-col text-left">
@@ -11,7 +11,7 @@
         type="email"
         placeholder="Email"
         v-model="email"
-        class="border-2 py-2 px-4 rounded-md border-gray-300 outline-none placeholder:text-gray-300 placeholder:text-sm"
+        class="border-2 py-2 px-4 rounded-md border-gray-300 focus:border-none focus:outline-none focus:ring-2 focus:ring-bluePrimary placeholder:text-gray-300 placeholder:text-sm"
       />
       <ErrorForms v-if="emailError" :text="emailError" />
       <label class="font-bold text-loginPrimary text-base md:text-lg mb-2 mt-5"
@@ -21,12 +21,12 @@
         v-model="password"
         type="password"
         placeholder="password"
-        class="border-2 py-2 px-4 rounded-md border-gray-300 outline-none placeholder:text-gray-300 placeholder:text-sm"
+        class="border-2 py-2 px-4 rounded-md border-gray-300 focus:border-none focus:outline-none focus:ring-2 focus:ring-bluePrimary placeholder:text-gray-300 placeholder:text-sm"
       />
       <ErrorForms v-if="passwordError" :text="passwordError" />
       <button
         type="submit"
-        class="bg-coralRed text-white mt-8 w-28 px-8 py-2 rounded-md self-center"
+        class="text-blueGray-700 mt-5 text-white bg-coralRed px-5 py-2 hover:bg-bluePrimary transition duration-700"
       >
         Login
       </button>
@@ -84,6 +84,7 @@ export default {
               password: this.password,
             }
           );
+          console.log(response);
           authStore.setToken(response.data.token);
           authStore.setUser(response.data.name);
           this.$router.push("/jobs");
