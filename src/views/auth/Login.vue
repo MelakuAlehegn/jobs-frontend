@@ -26,7 +26,7 @@
       <ErrorForms v-if="passwordError" :text="passwordError" />
       <button
         type="submit"
-        class="text-blueGray-700 mt-5 text-white bg-coralRed px-5 py-2 hover:bg-bluePrimary transition duration-700"
+        class="text-blueGray-700 mt-5 text-white bg-coralRed px-5 py-2 hover:bg-bluePrimary transition duration-700 rounded-md"
       >
         Login
       </button>
@@ -58,7 +58,7 @@ export default {
       if (this.emailError) {
         setTimeout(() => {
           this.emailError = "";
-        }, 4000);
+        }, 2000);
       }
       if (!this.emailError) {
         this.passwordError = this.password
@@ -69,7 +69,7 @@ export default {
         if (this.passwordError) {
           setTimeout(() => {
             this.passwordError = "";
-          }, 4000);
+          }, 2000);
         }
       } else {
         this.passwordError = "";
@@ -93,7 +93,7 @@ export default {
           if (this.incorrectCredentials) {
             setTimeout(() => {
               this.incorrectCredentials = "";
-            }, 4000);
+            }, 2000);
           }
         }
       }

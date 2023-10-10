@@ -30,7 +30,8 @@ module.exports = {
         coralRed: "#ff694b",
         lightCoralRed: "#fca897",
         loginPrimary: '#444444',
-        bluePrimary: "#192030"
+        bluePrimary: "#192030",
+        gayserGrey: "#c7d1d8"
       },
     },
   },

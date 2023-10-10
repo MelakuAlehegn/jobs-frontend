@@ -16,16 +16,16 @@
     </div>
     <div class="flex gap-8">
       <router-link
-        class="text-blueGray-700 text-white bg-coralRed px-5 py-2 hover:bg-bluePrimary transition duration-700"
+        class="text-blueGray-700 text-white bg-coralRed px-5 py-2 hover:bg-bluePrimary rounded-md transition duration-700"
         :to="{ name: 'Login' }"
         >Login</router-link
       >
 
-      <router-link
-        class="text-blueGray-700 text-white bg-coralRed px-5 py-2 hover:bg-bluePrimary transition duration-700"
+      <!-- <router-link
+        class="text-blueGray-700 text-white bg-coralRed px-5 py-2 hover:bg-bluePrimary rounded-md transition duration-700"
         :to="{ name: 'Login' }"
         >Sign up</router-link
-      >
+      > -->
     </div>
   </nav>
 </template>
