@@ -47,26 +47,26 @@
       <hr class="h-[1px] bg-darkGrayishCyan border-none w-11/12 md:hidden" />
       <div class="flex flex-wrap gap-3 pr-8 md:flex-nowrap md:float-right">
         <p
-          class="font-bold text-white bg-lightCoralRed px-2 pt-2 pb-1 rounded-md cursor-pointer"
+          class="font-bold text-loginPrimary hover:text-white hover:bg-coralRed transition duration-700 bg-lightCoralRed px-2 pt-2 pb-1 rounded-md cursor-pointer"
         >
           {{ data["role"] }}
         </p>
         <p
-          class="font-bold text-loginPrimary bg-lightCoralRed px-2 pt-2 pb-1 rounded-md cursor-pointer"
+          class="font-bold text-loginPrimary hover:text-white hover:bg-coralRed transition duration-700 bg-lightCoralRed px-2 pt-2 pb-1 rounded-md cursor-pointer"
         >
           {{ data["level"] }}
         </p>
         <p
           v-for="language in data['languages']"
           :key="language"
-          class="font-bold text-loginPrimary bg-lightCoralRed px-2 pt-2 pb-1 rounded-md cursor-pointer"
+          class="font-bold text-loginPrimary hover:text-white hover:bg-coralRed transition duration-700 bg-lightCoralRed px-2 pt-2 pb-1 rounded-md cursor-pointer"
         >
           {{ language }}
         </p>
         <p
           v-for="tools in data['tools']"
           :key="tools"
-          class="font-bold text-loginPrimary bg-lightCoralRed px-2 pt-2 pb-1 rounded-md cursor-pointer"
+          class="font-bold text-loginPrimary hover:text-white hover:bg-coralRed transition duration-700 bg-lightCoralRed px-2 pt-2 pb-1 rounded-md cursor-pointer"
         >
           {{ tools }}
         </p>
