@@ -10,15 +10,16 @@
       <div class="max-w-xs ml-6">
         <input
           v-model="selectedCompany"
-          @input="
-            fetchJobs();
-            updateCurrentPage();
-          "
+          @input="handleSearch"
           type="text"
+          @blur="handleSearch"
           placeholder="Search by company..."
           class="py-2 px-2 block w-full border-2 rounded-md text-sm outline-none focus:border-blue-500 focus:ring-blue-500"
         />
       </div>
+    </div>
+    <div v-if="data.length === 0" class="text-center mt-6">
+      <p class="text-gray-500">No jobs found.</p>
     </div>
     <JobDetails v-for="record in data" :key="record._id" :data="record" />
     <div class="flex justify-center gap-3 mt-4">
@@ -48,6 +49,7 @@
 </template>
 
 <script>
+import _debounce from "lodash/debounce";
 import VueCookies from "vue-cookies";
 import JobDetails from "./JobDetails.vue";
 import { useAuthStore } from "../../stores/AuthStore";
@@ -75,7 +77,7 @@ export default {
       authStore.logout();
       this.$router.push("/login");
     },
-    async fetchJobs(page = this.currentPage) {
+    async fetchJobs(page = this.currentPage, debounce = false) {
       try {
         const response = await axios.get(
           `http://localhost:8000/api/jobs?page=${page}&limit=3&company=${encodeURIComponent(
@@ -89,9 +91,19 @@ export default {
         console.log(error);
       }
     },
+    handleSearch: _debounce(function () {
+      this.fetchJobs(1, true);
+    }, 300),
   },
   created() {
     this.fetchJobs(this.currentPage);
+  },
+  watch: {
+    selectedCompany(newValue) {
+      if (newValue.trim() === "") {
+        this.fetchJobs();
+      }
+    },
   },
 };
 </script>
