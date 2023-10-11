@@ -10,20 +10,18 @@
       >
       <select
         v-model="selectedCompany"
-        @change="fetchCompany"
+        @change="
+          fetchJobs();
+          updateCurrentPage();
+        "
         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
       >
         <option value="">All Jobs</option>
-        <option
-          v-for="index in companyList"
-          :value="index.company"
-          :key="index.id"
-        >
-          {{ index.company }}
+        <option v-for="index in companyList" :value="index" :key="index.id">
+          {{ index }}
         </option>
       </select>
     </div>
-
     <JobDetails v-for="record in data" :key="record._id" :data="record" />
     <div class="flex justify-center gap-3 mt-4">
       <button
@@ -52,6 +50,7 @@
 </template>
 
 <script>
+import VueCookies from "vue-cookies";
 import JobDetails from "./JobDetails.vue";
 import { useAuthStore } from "../../stores/AuthStore";
 import axios from "axios";
@@ -63,7 +62,7 @@ export default {
   data() {
     return {
       data: [],
-      user: localStorage.getItem("user"),
+      user: VueCookies.get("user"),
       currentPage: 1,
       totalPages: 0,
       companyList: [],
@@ -71,12 +70,15 @@ export default {
     };
   },
   methods: {
+    updateCurrentPage() {
+      this.currentPage = 1;
+    },
     handleLogout() {
       const authStore = useAuthStore();
       authStore.logout();
       this.$router.push("/login");
     },
-    async fetchJobs(page) {
+    async fetchJobs(page = this.currentPage) {
       try {
         const response = await axios.get(
           `http://localhost:8000/api/jobs?page=${page}&limit=3&company=${encodeURIComponent(
@@ -86,7 +88,6 @@ export default {
         this.data = response.data.records;
         this.currentPage = response.data.currentPage;
         this.totalPages = response.data.pages;
-        this.populateCompanyList();
       } catch (error) {
         console.log(error);
       }
@@ -94,26 +95,17 @@ export default {
     async fetchCompany() {
       try {
         const response = await axios.get(`http://localhost:8000/api/jobs`);
-        this.companyList = response.data.records;
+        response.data.records.forEach((record) => {
+          this.companyList.push(record.company);
+        });
       } catch (error) {
         console.log(error);
       }
     },
-    populateCompanyList() {
-      const uniqueCompanies = [
-        ...new Set(this.data.map((record) => record.company)),
-      ];
-      this.companyList = uniqueCompanies;
-    },
   },
   created() {
     this.fetchJobs(this.currentPage);
-  },
-  watch: {
-    selectedCompany(newCompany) {
-      this.currentPage = 1;
-      this.fetchJobs(this.currentPage);
-    },
+    this.fetchCompany();
   },
 };
 </script>

@@ -1,29 +1,30 @@
+import VueCookies from 'vue-cookies';
 import { defineStore } from "pinia";
 
 export const useAuthStore = defineStore('auth', {
     state: () => ({
-        token: localStorage.getItem('token') || null,
+        token: VueCookies.get('token') || null,
         user: null,
         isAuthenticated: false
     }),
     actions: {
         setToken(token) {
             this.token = token;
-            localStorage.setItem('token', token)
+            VueCookies.set('token', token);
             this.isAuthenticated = true;
         },
         setUser(user) {
             this.user = user
-            localStorage.setItem('user', user)
+            VueCookies.set('user', user);
         },
         logout() {
             this.token = null;
             this.user = null
-            localStorage.removeItem('token')
+            VueCookies.remove('token');
             this.isAuthenticated = false;
         },
         init() {
-            const storedToken = localStorage.getItem('token');
+            const storedToken = VueCookies.get('token');
             if (storedToken) {
                 this.token = storedToken;
                 this.isAuthenticated = true;

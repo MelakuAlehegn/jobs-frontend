@@ -84,7 +84,6 @@ export default {
               password: this.password,
             }
           );
-          console.log(response);
           authStore.setToken(response.data.token);
           authStore.setUser(response.data.name);
           this.$router.push("/jobs");

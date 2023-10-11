@@ -4,22 +4,19 @@ import App from './App.vue';
 import router from './router';
 import '@/assets/css/styles.css';
 import { useAuthStore } from './stores/AuthStore';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-
-library.add(faChevronRight);
-library.add(faChevronLeft);
-
+import VueCookies from 'vue-cookies';
+import { createVuetify } from 'vuetify';
+import 'vuetify/dist/vuetify.min.css';
 
 const app = createApp(App);
 const pinia = createPinia();
 app.use(pinia);
 app.use(router);
+app.use(VueCookies);
+
+const vuetify = createVuetify();
 
 const authStore = useAuthStore(pinia);
 authStore.init();
-
-
-app.component('font-awesome-icon', FontAwesomeIcon);
-app.mount('#app')
+app.use(vuetify);
+app.mount('#app');
