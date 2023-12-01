@@ -11,12 +11,28 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        sans: ['Inter', 'sans-serif']
+        poppins: ['Poppins', "sans-serif"],
+        inter: ['Inter', 'sans-serif'],
+        sans: ['League Spartan', "sans-serif"],
+
       },
       fontWeight: {
         normal: '500',
+        thin: '500',
         bold: '700'
-      }
+      },
+      colors: {
+        desaturatedDarkCyan: 'hsl(180, 29%, 50%)',
+        lightGreyishCyanBg: 'hsl(180, 52%, 96%)',
+        lightGrayishCyanFilter: 'hsl(180, 31%, 95%)',
+        darkGrayishCyan: 'hsl(180, 8%, 52%)',
+        veryDarkGrayishCyan: 'hsl(180, 14%, 20%)',
+        coralRed: "#ff694b",
+        lightCoralRed: "#fca897",
+        loginPrimary: '#444444',
+        bluePrimary: "#192030",
+        gayserGrey: "#c7d1d8"
+      },
     },
   },
   plugins: [],

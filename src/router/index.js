@@ -1,8 +1,19 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue';
 import AboutView from "../views/AboutView.vue";
-import Login from "../views/Login.vue"
+import Login from "../views/auth/Login.vue"
+import Jobs from "../views/jobs/Jobs.vue"
+import { useAuthStore } from '../stores/AuthStore';
 
+const authGuard = (to, from, next) => {
+  const authStore = useAuthStore();
+  if (authStore.isAuthenticated) {
+    next()
+  }
+  else {
+    next('/login')
+  }
+}
 const routes = [
   {
     path: '/',
@@ -18,6 +29,12 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: Login
+  },
+  {
+    path: '/jobs',
+    name: 'Jobs',
+    component: Jobs,
+    beforeEnter: authGuard
   }
 ]
 
